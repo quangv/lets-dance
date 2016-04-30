@@ -16,12 +16,14 @@ class LightSwitch extends React.Component {
     var power;
 
     if(this.props.power){
-      power = "On"
+      power = "Turn Off"
     } else {
-      power = "Off"
+      power = "Turn On"
     }
 
-    return <div onClick={this.handleClick.bind(this)}>LightSwitch {power}</div>
+    return <div>
+      <button className="btn btn-primary" onClick={this.handleClick.bind(this)}>{power}</button>
+    </div>
   }
 }
 LightSwitch.propTypes = {
@@ -45,10 +47,27 @@ Floor.propTypes = {
 
 class DanceFloor extends React.Component {
   render() {
+    /*
+    <RM.Motion defaultStyle={{x: 0}} style={{x: RM.spring(10)}}>
+      {value => <div>{value.x}</div>}
+    </RM.Motion>
+    */
+    var preset = {
+      stiffness: 200,
+      damping: 4
+    }
     return (
-      <RM.Motion defaultStyle={{x: 0}} style={{x: RM.spring(10)}}>
-        {value => <div>{value.x}</div>}
-      </RM.Motion>
+      <svg height="300" width="500">
+        <RM.Motion defaultStyle={{x: 50, y:50}} style={{x: RM.spring(200, preset), y: RM.spring(100, preset)}}>
+          {value =>
+            <g>
+              <circle cx={value.x} cy={value.y} r="10" fill="red" />
+              <circle cx={value.x + 20} cy={value.y + 20} r="10" fill="blue" />
+              <circle cx={value.x + 50} cy={value.y + 50} r="10" fill="green" />
+            </g>
+          }
+        </RM.Motion>
+      </svg>
     )
   }
 }
