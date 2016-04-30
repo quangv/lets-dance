@@ -36,7 +36,7 @@ class Floor extends React.Component {
     if(this.props.power){
       return <DanceFloor />
     } else {
-      return <div>It's Dark</div>
+      return <div className="dark">It's Dark</div>
     }
   }
 }
@@ -54,16 +54,19 @@ class DanceFloor extends React.Component {
     */
     var preset = {
       stiffness: 200,
-      damping: 4
+      damping: 0
     }
     return (
-      <svg height="300" width="500">
-        <RM.Motion defaultStyle={{x: 50, y:50}} style={{x: RM.spring(200, preset), y: RM.spring(100, preset)}}>
+      <svg height="300" width="500" className="dancefloor">
+        <RM.Motion defaultStyle={{x: 250, y:0}} style={{x: RM.spring(0, preset), y: RM.spring(100, preset)}}>
           {value =>
             <g>
               <circle cx={value.x} cy={value.y} r="10" fill="red" />
-              <circle cx={value.x + 20} cy={value.y + 20} r="10" fill="blue" />
-              <circle cx={value.x + 50} cy={value.y + 50} r="10" fill="green" />
+              <circle cx={value.x} cy={value.y * 1.30} r="10" fill="blue" />
+              <circle cx={value.x} cy={value.y * 1.70} r="10" fill="lime" />
+              <circle cx={value.x} cy={value.y * 2.40} r="10" fill="purple" />
+              <circle cx={value.x} cy={value.y * 3.40} r="10" fill="yellow" />
+              <circle cx={value.x} cy={value.y * 4.40} r="10" fill="orange" />
             </g>
           }
         </RM.Motion>
