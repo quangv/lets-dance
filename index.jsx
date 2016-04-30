@@ -1,6 +1,10 @@
 var ReactDOM = require('react-dom')
 var React = require('react')
 
+var RM = require('react-motion');
+
+
+
 class LightSwitch extends React.Component {
 
   handleClick(event) {
@@ -26,21 +30,29 @@ LightSwitch.propTypes = {
 }
 
 class Floor extends React.Component {
-
   render() {
-    var msg;
-
     if(this.props.power){
-      msg = "Let's Dance."
+      return <DanceFloor />
     } else {
-      msg = ""
+      return <div>It's Dark</div>
     }
-    return <div>Floor {msg}</div>
   }
 }
 Floor.propTypes = {
   power: React.PropTypes.bool
 }
+
+
+class DanceFloor extends React.Component {
+  render() {
+    return (
+      <RM.Motion defaultStyle={{x: 0}} style={{x: RM.spring(10)}}>
+        {value => <div>{value.x}</div>}
+      </RM.Motion>
+    )
+  }
+}
+
 
 class App extends React.Component {
 
