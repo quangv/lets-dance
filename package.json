@@ -4,7 +4,9 @@
   "description": "svg react-motion demo",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "watchify -t reactify index.jsx -o index.js",
+    "start": "beefy | npm run watch"
   },
   "repository": {
     "type": "git",
@@ -13,6 +15,19 @@
   "author": "Quang Van",
   "license": "ISC",
   "dependencies": {
+    "react": "^15.0.2",
+    "react-dom": "^15.0.2",
+    "reactify": "^1.1.1",
     "watchify": "^3.7.0"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "reactify",
+        {
+          "es6": true
+        }
+      ]
+    ]
   }
 }
